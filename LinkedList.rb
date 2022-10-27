@@ -24,6 +24,10 @@ class LinkedList
     size(head.next_node, count += 1)
   end
 
+  def update_tail
+    self.tail = self.at(self.size - 1)
+  end
+
   def create_list(value=nil, next_node=nil)
     self.head = Node.new(value, next_node)
   end
@@ -35,6 +39,20 @@ class LinkedList
     at(index, node.next_node, count + 1)
   end
 
+  def pop(current_node = head)
+    return current_node.next_node = current_node.value = nil if current_node == update_tail
+    return current_node.next_node = nil if current_node.next_node.next_node.nil?
+
+    pop(current_node.next_node)
+  end
+
+  def print_list
+    puts '---------------------------'
+    self.size.times do |time|
+      p self.at(time).value
+    end
+    puts '---------------------------' 
+  end
 end
   
 list = LinkedList.new
@@ -46,9 +64,9 @@ puts '--------------------------------'
 p list.prepend(17)
 p list
 p list.size
-l2 = LinkedList.new
-p l2.size
 
-puts list.head.value
-puts list.tail.value
-p list.at(4)
+p list.tail
+list.print_list
+p list.pop
+p list.tail
+list.print_list
