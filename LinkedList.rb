@@ -28,6 +28,13 @@ class LinkedList
     self.head = Node.new(value, next_node)
   end
 
+  def at(index, node = head, count = 0)
+    return node if index == count
+    return 'Not found' if count == self.size
+
+    at(index, node.next_node, count + 1)
+  end
+
 end
   
 list = LinkedList.new
@@ -41,3 +48,7 @@ p list
 p list.size
 l2 = LinkedList.new
 p l2.size
+
+puts list.head.value
+puts list.tail.value
+p list.at(4)
