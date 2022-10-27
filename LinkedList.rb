@@ -59,6 +59,19 @@ class LinkedList
     return false if node.next_node.nil?
     contains?(value, node.next_node)
   end
+
+  def find(value, node = head, index = 0)
+    return 'Doesn\'t exist' if node.value.nil?
+    return index if node.value == value
+    find(value, node.next_node, index + 1)
+  end
+
+  def to_s(node = head, str = '')
+    return str += "( #{node.value} ) -> nil" if node.next_node.nil?
+
+    str += "( #{node.value} ) -> "
+    to_s(node.next_node, str)
+  end
 end
 
 list = LinkedList.new
@@ -80,3 +93,6 @@ list.print_list
 
 p list.contains?(17)
 p list.contains?(19)
+p list.find(17)
+p list.find(21)
+puts list.to_s
