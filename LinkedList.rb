@@ -53,8 +53,14 @@ class LinkedList
     end
     puts '---------------------------' 
   end
+
+  def contains?(value, node = head)
+    return true if node.value == value
+    return false if node.next_node.nil?
+    contains?(value, node.next_node)
+  end
 end
-  
+
 list = LinkedList.new
 list.append(19)
 p list
@@ -64,9 +70,13 @@ puts '--------------------------------'
 p list.prepend(17)
 p list
 p list.size
-
+=begin
 p list.tail
 list.print_list
 p list.pop
 p list.tail
 list.print_list
+=end
+
+p list.contains?(17)
+p list.contains?(19)
